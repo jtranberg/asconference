@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .countdown {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .event-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upcoming Event</h1>
+        <img src="/img/AS.png" alt="Event Poster">
+        <div class="countdown" id="countdown"></div>
+        <a href="https://www.tickettailor.com/events/indieweek/1484590" class="event-link" target="_blank">Join the Event</a>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const eventDate = new Date("2025-02-10T18:00:00").getTime(); // Set event date & time
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById("countdown").innerHTML = "Event is live now!";
+            }
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
