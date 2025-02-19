@@ -6,7 +6,6 @@
     <title>Event Countdown</title>
     <style>
         body {
-            
             font-family: Arial, sans-serif;
             text-align: center;
             background: #121212;
@@ -16,16 +15,9 @@
             animation: hueRotate 5s infinite alternate ease-in-out;
         }
         @keyframes hueRotate {
-            0% {
-                background-color: #080808;
-            }
-            50% {
-                background-color: #333030;
-            }
-            100% {
-                background-color: #080808;
-                
-            }
+            0% { background-color: #080808; }
+            50% { background-color: #333030; }
+            100% { background-color: #080808; }
         }
         .container {
             max-width: 600px;
@@ -41,17 +33,17 @@
             animation: fadeIn 2s ease-in-out;
         }
         .countdown {
-            
             font-size: 24px;
             margin-top: 20px;
             font-weight: bold;
             background-color: #9c44f4;
             border-radius: 10px;
+            padding: 10px;
         }
-        h1
-        {
+        h1 {
             background: #9c44f4;
             border-radius: 10px;
+            padding: 10px;
         }
         .event-link {
             display: inline-block;
@@ -62,34 +54,29 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background 0.3s ease;
+            pointer-events: none; /* Disabled until link is updated */
         }
         .event-link:hover {
             background: #9c44f4;
             transform: scale(1.2);
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Upcoming Event</h1>
-        <img src="/img/AS.png" alt="Event Poster">
+        <h1>We're back, you demanded it! Friday Nights, like you have never seen before...Bigger.Better.</h1>
+        <img src="/img//fridaynight.png" alt="Event Poster">
         <div class="countdown" id="countdown"></div>
-        <a href="https://www.tickettailor.com/events/indieweek/1484590" class="event-link" target="_blank">Get Tickets / Join the Event</a>
+        <a href="#" class="event-link" target="_blank">Link will be live on ...Friday 21 Feb 2025</a>
     </div>
 
     <script>
         function updateCountdown() {
-            const eventDate = new Date("2025-02-10T10:00:00-05:00").getTime(); // Updated to 10 AM EST
+            const eventDate = new Date("2025-02-21T16:00:00-08:00").getTime(); // 4 PM PST
             const now = new Date().getTime();
             const timeLeft = eventDate - now;
             
