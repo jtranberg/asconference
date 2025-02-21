@@ -53,12 +53,16 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background 0.3s ease;
-            pointer-events: none; /* Disabled until link is updated */
+            transition: background 0.3s ease, transform 0.2s ease-in-out;
+            pointer-events: none; /* Initially disabled */
         }
         .event-link:hover {
             background: #9c44f4;
             transform: scale(1.2);
+        }
+        .event-live {
+            background: #28a745 !important;
+            pointer-events: auto !important;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
@@ -68,29 +72,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>We're back, the fans demanded it! Friday Nights returns,better than ever before.</h1>
-        <img src="/img//fridaynight.png" alt="Event Poster">
+        <h1>We're back, the fans demanded it! Friday Nights returns, better than ever before.</h1>
+        <img src="/img/fridaynight.png" alt="Event Poster">
         <div class="countdown" id="countdown"></div>
-        <a href="#" class="event-link" target="_blank">Link will be live on ...Friday 21 Feb 2025 4pm</a>
+        <a id="eventLink" href="#" class="event-link" target="_blank">Link will be live 1 hour before the event</a>
     </div>
 
     <script>
         function updateCountdown() {
             const eventDate = new Date("2025-02-21T16:00:00-08:00").getTime(); // 4 PM PST
+            const liveOneHourBefore = eventDate - (60 * 60 * 1000); // 1 hour before event (3 PM PST)
             const now = new Date().getTime();
             const timeLeft = eventDate - now;
-            
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const countdownElement = document.getElementById("countdown");
+            const eventLink = document.getElementById("eventLink");
+            const liveEventURL = "https://www.youtube.com/watch?v=sWJB8q6TOgw"; // ✅ Replace with live event link
+
+            if (now >= liveOneHourBefore && now < eventDate) {
+                countdownElement.innerHTML = "The event link is **LIVE NOW** (1 hour early)!";
+                eventLink.innerHTML = "Click Here to Join!";
+                eventLink.href = liveEventURL;
+                eventLink.classList.add("event-live");
+            } else if (now >= eventDate) {
+                countdownElement.innerHTML = "Event is live now!";
+                eventLink.innerHTML = "Click Here to Join!";
+                eventLink.href = liveEventURL;
+                eventLink.classList.add("event-live");
+            } else {
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            } else {
-                document.getElementById("countdown").innerHTML = "Event is live now!";
+                countdownElement.innerHTML = `Event starts in ${hours}h ${minutes}m ${seconds}s`;
             }
         }
-        
+
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
